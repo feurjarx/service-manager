@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -a
-if [ "$3" != "" ]; then . $3; else . .env.development; fi
+if [ "$3" != "" ]; then . $3; else . .env; fi
 set +a
 
 function __usage ()
