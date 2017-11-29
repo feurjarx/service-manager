@@ -1,0 +1,31 @@
+version: '2'
+services:
+  web:
+      container_name: village.web
+      image: village-web.image
+      build:
+        context: .
+        dockerfile: ./services/docker/web/Dockerfile
+        args:
+          DEV_MODE: 0
+          HOST_IP: db
+          WEB_INIT_ANSWERS: "0 yes Yes Yes"
+          WEB_APP_DIR: "/app"
+          GIT_CREDENTIALS: "deployer:r8gl9XY4oMCX"
+      ports:
+          - "80:8000"
+      links:
+          - db
+  db:
+      container_name: village.db
+      image: mysql
+      ports:
+          - "3306:3306"
+      volumes:
+          - mydata:/var/lib/mysql
+      environment:
+          MYSQL_DATABASE: village
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: "password"
+volumes:
+  mydata: {}
