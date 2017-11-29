@@ -7,7 +7,7 @@ services:
         context: .
         dockerfile: ./services/docker/web/Dockerfile
         args:
-          DEV_MODE: 0
+          DEV_MODE: "true"
           HOST_IP: db
           WEB_INIT_ANSWERS: "0 yes Yes Yes"
           WEB_APP_DIR: "/app"

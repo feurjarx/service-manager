@@ -26,15 +26,11 @@ RUN find ${SERVICE_MANAGER_DIR} -name "*.sh" | xargs sed -i "s/^sh /.\//g"
 RUN cd ${serviceManagerDir}; \
     ./service.sh host sshd deploy
 
-## todo: remove it later
-#COPY . ${serviceManagerDir}/app
-
 EXPOSE ${SSH_PORT}
 
 ENV sshLogDir /var/log/sshd
 RUN mkdir ${sshLogDir} && echo "" > ${sshLogDir}/access.log
 
 CMD cd ${serviceManagerDir}; \
-    ./service.sh host sshd init; \
-    /usr/sbin/sshd -D -E  ${sshLogDir}/access.log
+    ./service.sh host sshd init & /usr/sbin/sshd -D -E  ${sshLogDir}/access.log
 #CMD ["/usr/sbin/sshd", "-D"]

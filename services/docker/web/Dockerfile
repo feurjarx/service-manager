@@ -38,7 +38,6 @@ RUN export WEB_XDEBUG_PORT=${WEB_XDEBUG_PORT}; \
     if [ "${DEV_MODE}" = "true" ]; then /setup_xdebug; fi
 
 ## Putting source
-# todo: to remove COPY belove
 COPY . ${WEB_APP_DIR}
 #RUN git clone -b "feature/VAB-323_prod_server_preparation" \
 #    "http://${GIT_CREDENTIALS}@gitlab.icerockdev.com/village-app/village-app-backend.git" ${WEB_APP_DIR}

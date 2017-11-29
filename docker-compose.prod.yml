@@ -3,15 +3,6 @@ services:
   web:
       container_name: village.web
       image: village-web.image
-      build:
-        context: .
-        dockerfile: ./services/docker/web/Dockerfile
-        args:
-          DEV_MODE: 0
-          HOST_IP: db
-          WEB_INIT_ANSWERS: "0 yes Yes Yes"
-          WEB_APP_DIR: "/app"
-          GIT_CREDENTIALS: "deployer:r8gl9XY4oMCX"
       ports:
           - "80:8000"
       links:

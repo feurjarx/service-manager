@@ -14,15 +14,6 @@ function __waitForDatabaseConnection {
     timeout=20
     count=0
 
-    function __loop {
-        counter=$[$counter+1]
-        sleep 1
-        if [ $counter -gt $timeout ]; then
-            echo "[x] Error! There is not connection."
-            exit 1
-        fi
-    }
-
     echo "Waiting for connection ..."
 
     passwordFragment=""
@@ -32,7 +23,12 @@ function __waitForDatabaseConnection {
 
     while ! docker exec -t $MYSQL_CONTAINER mysql -u $MYSQL_USER -e "SELECT 1" $passwordFragment $MYSQL_DB &>/dev/null
     do
-        __loop
+        counter=$[$counter+1]
+        sleep 1
+        if [ $counter -gt $timeout ]; then
+            echo "[x] Error! There is not connection."
+            exit 1
+        fi
     done
 
     echo "Done."
